@@ -8,10 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TipoDocumento extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = "tipos_documento";
+    
     protected $fillable = [
         'nombre'
     ];
+
+    public function documentos()
+    {
+        return $this->hasMany(Documento::class);
+    }
 }
