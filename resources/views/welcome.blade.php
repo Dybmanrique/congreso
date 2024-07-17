@@ -265,6 +265,7 @@
         </div>
     </div>
 
+    <x-convocatoria.convocatoria />
     {{-- @livewire('particpantes-component')
     @livewire('ponentes-component')
     @component('convocatoria.convocatoria')
