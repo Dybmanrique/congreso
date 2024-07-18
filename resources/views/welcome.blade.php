@@ -278,7 +278,7 @@
     @livewire('registrar-grupo-investigacion-form')
     @livewire('registrar-institucion-modal-form') --}}
 
-
+    @livewire('convocatoria.registro-ponentes')
 
     <footer class="footer bg-light text-dark">
         <div class="container text-center text-md-left">
@@ -369,7 +369,7 @@
     </script>
 
     @livewireScripts
-    @yield('js')
+    @stack('js')
 </body>
 
 </html>
