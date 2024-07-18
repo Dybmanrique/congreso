@@ -150,7 +150,7 @@
 </div>
 </div>
 
-@section('js')
+@push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.addEventListener('closeParticipanteModal', event => {
@@ -169,6 +169,6 @@
             });
         });
     </script>
-@endsection
+@endpush
 
 </div>
