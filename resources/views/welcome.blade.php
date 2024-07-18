@@ -267,6 +267,8 @@
 
     <x-convocatoria.convocatoria />
     @livewire('convocatoria.ponentes')
+    @livewire('convocatoria.registro-participantes')
+
     {{-- @livewire('particpantes-component')
     @livewire('ponentes-component')
     @component('convocatoria.convocatoria')
