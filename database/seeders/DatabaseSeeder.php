@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\GrupoInvestigacion;
+use App\Models\Institucion;
 use App\Models\MetodoPago;
 use App\Models\TipoDocumento;
+use App\Models\TipoParticipante;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -34,6 +37,18 @@ class DatabaseSeeder extends Seeder
         ]);
         TipoDocumento::create([
             'nombre' => 'Carnet de extranjería'
+        ]);
+        TipoParticipante::create([
+            'tipo' => 'Estudiante'
+        ]);
+        TipoParticipante::create([
+            'tipo' => 'Público en general'
+        ]);
+        GrupoInvestigacion::create([
+            'nombre' => 'Ninguno'
+        ]);
+        Institucion::create([
+            'nombre' => 'Ninguno'
         ]);
 
         User::factory()->create([
