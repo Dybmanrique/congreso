@@ -37,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="tipo_documento_id" class="form-label">Tipo de Documento:</label>
+                                            <label for="tipo_documento_id" class="mt-2">Tipo de Documento:</label>
                                             <select class="form-control" id="tipo_documento_id"
                                                 wire:model="tipo_documento_id" required>
                                                 <option value="0" selected hidden>Seleccione ... </option>
@@ -58,7 +58,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="nombres" class="form-label">Nombres:</label>
+                                            <label for="nombres" class="mt-2">Nombres:</label>
                                             <input type="text" class="form-control" id="nombres" wire:model="nombres"
                                                 required>
                                             @error('nombres')
@@ -66,7 +66,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="ap_paterno" class="form-label">Apellido Paterno:</label>
+                                            <label for="ap_paterno" class="mt-2">Apellido Paterno:</label>
                                             <input type="text" class="form-control" id="ap_paterno"
                                                 wire:model="ap_paterno" required>
                                             @error('ap_paterno')
@@ -74,7 +74,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="ap_materno" class="form-label">Apellido Materno:</label>
+                                            <label for="ap_materno" class="mt-2">Apellido Materno:</label>
                                             <input type="text" class="form-control" id="ap_materno"
                                                 wire:model="ap_materno" required>
                                             @error('ap_materno')
@@ -82,7 +82,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="correo" class="form-label">Correo:</label>
+                                            <label for="correo" class="mt-2">Correo:</label>
                                             <input type="email" class="form-control" id="correo" wire:model="correo"
                                                 required>
                                             @error('correo')
@@ -90,7 +90,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="celular" class="form-label">Celular:</label>
+                                            <label for="celular" class="mt-2">Celular:</label>
                                             <input type="tel" class="form-control" id="celular" wire:model="celular"
                                                 required>
                                             @error('celular')
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="grupo_investigacion_id" class="form-label">Grupo de
+                                            <label for="grupo_investigacion_id" class="mt-2">Grupo de
                                                 Investigacion:</label>
                                             <div class="d-flex align-items-center">
                                                 <select class="form-control" style="margin-right: 0.5rem;"
@@ -116,13 +116,13 @@
                                                     data-bs-toggle="modal" data-bs-target="#registrarGrupoModal">
                                                     <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>Grupo
                                                 </button>
-                                                @error('grupo_investigacion_id')
-                                                    <span class="error text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
+                                            @error('grupo_investigacion_id')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="institucion_id" class="form-label">Institucion:</label>
+                                            <label for="institucion_id" class="mt-2">Institucion:</label>
                                             <div class="d-flex align-items-center">
                                                 <select class="form-control" style="margin-right: 0.5rem;"
                                                     id="institucion_id" wire:model="institucion_id" required>
@@ -139,13 +139,13 @@
                                                     <i class="fas fa-plus"
                                                         style="margin-right: 0.5rem;"></i>Institución
                                                 </button>
-                                                @error('institucion_id')
-                                                    <span class="error text-danger">{{ $message }}</span>
-                                                @enderror
                                             </div>
+                                            @error('institucion_id')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="orcid_id" class="form-label">ORCID ID:</label>
+                                            <label for="orcid_id" class="mt-2">ORCID ID:</label>
                                             <input type="text" class="form-control" id="orcid_id"
                                                 wire:model="orcid_id" required>
                                             @error('orcid_id')
@@ -153,7 +153,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="foto" class="form-label">Subir Foto:</label>
+                                            <label for="foto" class="mt-2">Subir Foto:</label>
                                             <input type="file" class="form-control" id="foto" wire:model="foto"
                                                 required>
                                             @error('foto')
@@ -161,7 +161,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="cv_resumen" class="form-label">CV Resumen:</label>
+                                            <label for="cv_resumen" class="mt-2">CV Resumen:</label>
                                             <textarea wire:model="cv_resumen" name="cv_resumen" id="cv_resumen" class="form-control" rows="3"></textarea>
                                             @error('cv_resumen')
                                                 <span class="error text-danger">{{ $message }}</span>
