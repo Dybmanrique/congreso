@@ -267,11 +267,11 @@
             <script>
                 window.addEventListener('showPonenciaSuccessAlert', event => {
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Registro Exitoso!',
-                        position: 'top-end',
-                        timer: 3000,
-                        toast: true,
+                        title: "¡Gracias por Registrarse!",
+                        text: "Evaluaremos sus datos, y le confirmaremos a su correo.",
+                        icon: "success",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
                     });
                 });
 
