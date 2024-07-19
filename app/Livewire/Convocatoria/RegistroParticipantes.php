@@ -128,8 +128,8 @@ class RegistroParticipantes extends Component
             $this->imagen_comprobante = '';
             $this->fecha_registro = '';
 
-        } catch (\Throwable $th) {
-            // session()->flash('message', $th);
+        } catch (\Exception $ex) {
+            $this->dispatch('error');
         }
     }
 

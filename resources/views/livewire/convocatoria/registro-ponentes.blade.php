@@ -262,9 +262,7 @@
                         @this.set('institucion_id', message.id)
                     }, 500);
                 })
-            </script>
 
-            <script>
                 window.addEventListener('showPonenciaSuccessAlert', event => {
                     Swal.fire({
                         title: "¡Gracias por Registrarse!",
@@ -273,6 +271,13 @@
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                     });
+                });
+
+                window.addEventListener('error', event => {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Algo salió mal, reinicie la página.',
+                    })
                 });
 
                 $('#agregarGrupo').click(function() {

@@ -155,13 +155,17 @@
         window.addEventListener('closeParticipanteModal', event => {
             $('#registrarParticipanteModal').modal('hide');
         });
-    </script>
 
-    <script>
         window.addEventListener('showParticipanteSuccessAlert', event => {
             Toast.fire({
                 icon: 'success',
                 title: 'Se ha registrado correctamente',
+            })
+        });
+        window.addEventListener('error', event => {
+            Toast.fire({
+                icon: 'error',
+                title: 'Algo salió mal, reinicie la página.',
             })
         });
     </script>
