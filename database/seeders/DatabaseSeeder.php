@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EjeTematico;
 use App\Models\GrupoInvestigacion;
 use App\Models\Institucion;
 use App\Models\MetodoPago;
@@ -50,6 +51,19 @@ class DatabaseSeeder extends Seeder
         Institucion::create([
             'nombre' => 'Ninguno'
         ]);
+
+        $ejes_tematicos = [
+            ['nombre' => 'Salud Pública'],
+            ['nombre' => 'Cambio Climático, Biodiversidad y Sociedad'],
+            ['nombre' => 'Minería y Sostenibilidad'],
+            ['nombre' => 'Saneamiento y Urbanismo'],
+            ['nombre' => 'Producción y Seguridad Alimentaria'],
+            ['nombre' => 'Finanzas, Economía y Turismo'],
+            ['nombre' => 'Ciencia y Tecnología'],
+            ['nombre' => 'Inclusión, Interculturalidad y Procesos Educativos'],
+            ['nombre' => 'Justicia y Derechos Humanos'],
+        ];
+        EjeTematico::insert($ejes_tematicos);
 
         User::factory()->create([
             'name' => 'Deyber Manrique',

@@ -4,11 +4,13 @@ namespace App\Livewire\Convocatoria;
 
 use App\Models\Autor;
 use App\Models\Documento;
+use App\Models\EjeTematico;
 use App\Models\GrupoInvestigacion;
 use App\Models\Institucion;
 use App\Models\Persona;
 use App\Models\Ponencia;
 use App\Models\Ponente;
+use App\Models\PonentePonencia;
 use App\Models\TipoDocumento;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -63,6 +65,7 @@ class RegistroPonentes extends Component
         $this->tiposDocumento = TipoDocumento::all();
         $this->grupoInvestigacion = GrupoInvestigacion::all();
         $this->instit = Institucion::all();
+        $this->ejesTematicos = EjeTematico::all();
     }
 
     public function registrarPonencia()
@@ -105,12 +108,18 @@ class RegistroPonentes extends Component
     
             $nombreFoto = $this->foto->store('fotos', 'public');
     
-            $Ponente = new Ponente();
-            $Ponente->autor_id = $Autor->id;
-            $Ponente->cv_resumen = $this->cv_resumen;
-            $Ponente->foto =  $nombreFoto;
-            $Ponente->save();
-            $ponencia->ponentes()->attach($Ponente->id);
+            $ponente = new Ponente();
+            $ponente->autor_id = $Autor->id;
+            $ponente->cv_resumen = $this->cv_resumen;
+            $ponente->foto =  $nombreFoto;
+            $ponente->save();
+            // $ponencia->ponentes()->attach($Ponente->id);
+    
+            PonentePonencia::create([
+                'ponente_id' => $ponente->id,
+                'ponencia_id' => $ponencia->id,
+                'eje_tematico_id' => $this->eje_tematico_id,
+            ]);
     
             // Limpia los campos
             $this->reset([
@@ -131,7 +140,6 @@ class RegistroPonentes extends Component
             'nombre' => $this->grupo_investigacion_add
         ]);
         $this->grupoInvestigacion = GrupoInvestigacion::all();
-        // $this->grupo_investigacion_id = $grupo_agregado->id;
         $this->dispatch('grupoAgregado', id: $grupo_agregado->id);
         $this->reset(['grupo_investigacion_add']);
     }
@@ -145,8 +153,7 @@ class RegistroPonentes extends Component
             'nombre' => $this->institucion_add
         ]);
         $this->instit = Institucion::all();
-        // $this->institucion_id = $institucion_agregada->id;
-        $this->dispatch('institucionAgregada', id: $institucion_agregada->id, nombre: $institucion_agregada->nombre);
+        $this->dispatch('institucionAgregada', id: $institucion_agregada->id);
         $this->reset(['institucion_add']);
     }
 

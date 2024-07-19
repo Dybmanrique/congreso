@@ -33,10 +33,10 @@
                                     <select class="form-control" style="margin-right: 0.5rem;" id="eje_tematico_id"
                                         wire:model="eje_tematico_id" required>
                                         <option value="0" selected hidden>Seleccione ... </option>
-                                        {{-- @foreach ($instit as $institucion)
-                                            <option value="{{ $institucion->id }}">
-                                                {{ $institucion->nombre }}</option>
-                                        @endforeach --}}
+                                        @foreach ($ejesTematicos as $eje)
+                                            <option value="{{ $eje->id }}">
+                                                {{ $eje->nombre }}</option>
+                                        @endforeach
                                     </select>
                                     @error('eje_tematico_id')
                                         <span class="error text-danger">{{ $message }}</span>
