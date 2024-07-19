@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('ponente_id')->constrained('ponentes')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('ponencia_id')->constrained('ponencias')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('eje_tematico_id')->constrained('eje_tematicos')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('estado')->default(0);
             $table->char('uuid', length: 36)->nullable();
             $table->timestamps();
