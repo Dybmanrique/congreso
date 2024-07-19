@@ -4,12 +4,12 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registrarPonenciaModalLabel">Registrar Ponencia</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form wire:submit.prevent="submitForm" class="row g-3 needs-validation">
+                <form wire:submit.prevent="submitForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registrarPonenciaModalLabel">Registrar Ponencia</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <div class="card mt-3">
                             <div class="card-body">
                                 <h6>Datos de la ponencia</h6>
@@ -180,16 +180,12 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="col-12">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" type="submit">Enviar</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+                    </div>
+                </form>
             </div>
         </div>
 

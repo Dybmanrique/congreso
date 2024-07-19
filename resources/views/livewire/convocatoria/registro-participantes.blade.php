@@ -3,7 +3,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form wire:submit.prevent="submitForm" class="row g-3 needs-validation">
+            <form wire:submit.prevent="submitForm">
                 <div class="modal-header">
                     <h5 class="modal-title" id="registrarParticipanteModalLabel">REGISTRARME</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
