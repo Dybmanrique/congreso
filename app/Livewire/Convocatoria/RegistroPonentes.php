@@ -19,7 +19,7 @@ class RegistroPonentes extends Component
 
     public $ponencia, $titulo, $resumen, $nombres,  $ap_paterno, $ap_materno, $correo, $celular, $tipo_documento_id, $numero_documento, $tiposDocumento,
         $grupoInvestigacion, $documento, $persona_id, $grupo_investigacion_id, $institucion_id, $orcid_id, $cv_resumen, $foto, $instit, $Grupo_Investigacion, $nombre_grupo, $nombre_institucion, $valorNombreGrupo;
-    public $ejesTematicos, $eje_tematico_id;
+    public $ejesTematicos, $eje_tematico_id, $grupo_investigacion_add, $institucion_add;
 
     public function validateForm()
     {
@@ -120,6 +120,34 @@ class RegistroPonentes extends Component
         } catch (\Throwable $th) {
             // session()->flash('message', $th);
         }
+    }
+
+    function registrar_grupo() {
+        $this->validate([
+            'grupo_investigacion_add' => 'required|max:255|string'
+        ]);
+
+        $grupo_agregado = GrupoInvestigacion::create([
+            'nombre' => $this->grupo_investigacion_add
+        ]);
+        $this->grupoInvestigacion = GrupoInvestigacion::all();
+        // $this->grupo_investigacion_id = $grupo_agregado->id;
+        $this->dispatch('grupoAgregado', id: $grupo_agregado->id);
+        $this->reset(['grupo_investigacion_add']);
+    }
+
+    function registrar_institucion() {
+        $this->validate([
+            'institucion_add' => 'required|max:255|string'
+        ]);
+
+        $institucion_agregada = Institucion::create([
+            'nombre' => $this->institucion_add
+        ]);
+        $this->instit = Institucion::all();
+        // $this->institucion_id = $institucion_agregada->id;
+        $this->dispatch('institucionAgregada', id: $institucion_agregada->id, nombre: $institucion_agregada->nombre);
+        $this->reset(['institucion_add']);
     }
 
     public function render()
