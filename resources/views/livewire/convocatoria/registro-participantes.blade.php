@@ -151,7 +151,6 @@
 </div>
 
 @push('js')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         window.addEventListener('closeParticipanteModal', event => {
             $('#registrarParticipanteModal').modal('hide');
@@ -160,13 +159,10 @@
 
     <script>
         window.addEventListener('showParticipanteSuccessAlert', event => {
-            Swal.fire({
+            Toast.fire({
                 icon: 'success',
-                title: 'Registro Exitoso!',
-                position: 'top-end',
-                timer: 3000,
-                toast: true,
-            });
+                title: 'Se ha registrado correctamente',
+            })
         });
     </script>
 @endpush

@@ -338,9 +338,7 @@
         </div>
     </footer>
 
-
-
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         var fechaFinal = new Date("Nov 04, 2024 00:00:00").getTime();
 
@@ -366,6 +364,21 @@
                 document.getElementById("segundos").innerHTML = "¡Llegó el día!";
             }
         }, 1000);
+
+        var Toast = Swal.mixin({
+            toast: true,
+            icon: 'success',
+            title: 'General Title',
+            animation: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
     </script>
 
     @livewireScripts
