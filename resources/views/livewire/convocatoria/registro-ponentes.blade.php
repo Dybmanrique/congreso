@@ -9,7 +9,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit.prevent="registrarPonencia" class="row g-3 needs-validation">
+                    <form wire:submit.prevent="submitForm" class="row g-3 needs-validation">
                         <div class="card mt-3">
                             <div class="card-body">
                                 <h6>Datos de la ponencia</h6>
@@ -28,7 +28,20 @@
                                         <span class="error text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="eje_tematico_id" class="mt-2">Eje temático:</label>
+                                    <select class="form-control" style="margin-right: 0.5rem;"
+                                        id="eje_tematico_id" wire:model="eje_tematico_id" required>
+                                        <option value="0" selected hidden>Seleccione ... </option>
+                                        {{-- @foreach ($instit as $institucion)
+                                            <option value="{{ $institucion->id }}">
+                                                {{ $institucion->nombre }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                    @error('eje_tematico_id')
+                                        <span class="error text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="card mt-3">
@@ -177,7 +190,7 @@
                         </div>
                         <div class="col-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" type="submit" wire:click="submitForm">Enviar</button>
+                            <button class="btn btn-primary" type="submit">Enviar</button>
                         </div>
                     </form>
                 </div>
