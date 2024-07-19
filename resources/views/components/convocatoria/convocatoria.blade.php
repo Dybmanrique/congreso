@@ -35,9 +35,8 @@
                 <div class="elementor-element elementor-element-8a257fa elementor-widget elementor-widget-text-editor"
                     data-id="8a257fa" data-element_type="widget" data-widget_type="text-editor.default">
                     <div class="elementor-widget-container">
-                        <p><b>Ejes Temáticas</b><b><br></b></p>
+                        <p><b>Ejes Temáticos</b><b><br></b></p>
                         <ul>
-                            <li></li>
                             <li>Salud Pública</li>
                             <li>Cambio Climático, Biodiversidad y Sociedad.</li>
                             <li>Minería y Sostenibilidad</li>
@@ -51,11 +50,6 @@
                         </ul>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>
