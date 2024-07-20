@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('participante_id')->constrained('participantes')->onDelete('cascade')->onUpdate('cascade');
             $table->dateTime('fecha_registro');
-            $table->string('is_valido')->default(false);
+            $table->string('es_valido')->default(false);
             $table->foreignId('comprobante_id')->constrained('comprobantes')->onDelete('cascade')->onUpdate('cascade');
             $table->char('uuid', length: 36)->nullable();
             $table->timestamps();
