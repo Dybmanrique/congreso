@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Participante;
 use App\Models\Persona;
+use App\Models\RegistroCongreso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,9 +27,27 @@ class ParticipantesController extends Controller
             join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id");
 
         foreach ($participantes as $participante) {
-            // $participante->identificaciones = Persona::find($participante->persona_id)->documentos()->select(['individuals.id', 'last_name', 'second_last_name', 'name', 'identity_number', 'identity_document_id'])->with('identity_document:id,name')->get();
             $participante->identificaciones = Persona::find($participante->persona_id)->todos_los_documentos()->get();
         }
         return $participantes;
+    }
+    public function validar(Request $request)
+    {
+        try {
+            $visit = RegistroCongreso::find($request->id);
+
+            $visit->update([
+                'es_valido' => true,
+            ]);
+            return response()->json([
+                'message' => 'Operación realizada',
+                'code' => '200'
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'message' => 'Algo salió mal',
+                'code' => '500'
+            ]);
+        }
     }
 }
