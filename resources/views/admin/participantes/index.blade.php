@@ -130,7 +130,7 @@
                         `<button class="btn btn-sm btn-info mr-2" onclick="ver('${data.imagen_comprobante}')" type="button" data-toggle="modal" data-target="#modalVer"><i class=" fas fa-eye"></i> Ver comprobante</button>`;
                     if (data.es_valido == 0) {
                         template +=
-                            `<button class="btn btn-sm btn-success mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Validar</button>`;
+                            `<button class="btn btn-sm btn-primary mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Validar</button>`;
                     } else {
                         template +=
                             `<button class="btn btn-sm btn-danger mr-2" onclick="invalidar(${data.id})" type="button"><i class=" fas fa-ban"></i> Invalidar</button>`;

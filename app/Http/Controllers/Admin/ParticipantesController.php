@@ -24,7 +24,7 @@ class ParticipantesController extends Controller
             join tipos_participantes on tipos_participantes.id = participantes.tipo_participante_id
             join personas on participantes.persona_id = personas.id
             join comprobantes on registro_congreso.comprobante_id = comprobantes.id
-            join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id");
+            join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id order by registro_congreso.id desc");
 
         foreach ($participantes as $participante) {
             $participante->identificaciones = Persona::find($participante->persona_id)->todos_los_documentos()->get();
