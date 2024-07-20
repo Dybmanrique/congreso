@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <label for="imagen_comprobante" class="mt-2">Subir recibo:</label>
                                         <input type="file" class="form-control" id="imagen_comprobante"
-                                            wire:model="imagen_comprobante" required>
+                                            wire:model="imagen_comprobante" accept="image/*" required>
                                         @error('imagen_comprobante')
                                             <span class="error text-danger">{{ $message }}</span>
                                         @enderror
