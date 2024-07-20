@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Congreso',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>CONGRESO</b> UNASAM',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -319,7 +319,7 @@ return [
         ['header' => 'CONGRESO'],
         [
             'text' => 'Participantes',
-            'url' => 'participantes',
+            'route' => 'admin.participantes.index',
             'icon' => 'fas fa-fw fa-users',
         ],
         [
@@ -371,7 +371,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
