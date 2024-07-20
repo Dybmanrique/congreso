@@ -18,5 +18,7 @@ Route::middleware([
     Route::get('participantes/crear', [ParticipantesController::class, 'create'])->name('admin.participantes.create');
 
     //PONENTES
-    Route::get('ponentes/crear', [PonentesController::class, 'index'])->name('admin.ponentes.index');
+    Route::get('ponentes', [PonentesController::class, 'index'])->name('admin.ponentes.index');
+    Route::get('ponentes/data', [PonentesController::class, 'data'])->name('admin.ponentes.data');
+
 });
