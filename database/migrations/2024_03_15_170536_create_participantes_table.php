@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('tipo_participante_id')->constrained('tipos_participantes')->onDelete('cascade')->onUpdate('cascade');
             $table->char('uuid', length: 36)->nullable();
+            $table->boolean('es_valido')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
