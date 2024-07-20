@@ -50,4 +50,23 @@ class ParticipantesController extends Controller
             ]);
         }
     }
+    public function invalidar(Request $request)
+    {
+        try {
+            $visit = RegistroCongreso::find($request->id);
+
+            $visit->update([
+                'es_valido' => false,
+            ]);
+            return response()->json([
+                'message' => 'Operación realizada',
+                'code' => '200'
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'message' => 'Algo salió mal',
+                'code' => '500'
+            ]);
+        }
+    }
 }

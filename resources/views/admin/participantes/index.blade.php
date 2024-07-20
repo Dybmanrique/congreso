@@ -18,7 +18,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img id="imgComprobante" src="https://edteam-media.s3.amazonaws.com/blogs/big/2ab53939-9b50-47dd-b56e-38d4ba3cc0f0.png" class="img-fluid" alt="Imagen del comprobante">
+                    <img id="imgComprobante"
+                        src="https://edteam-media.s3.amazonaws.com/blogs/big/2ab53939-9b50-47dd-b56e-38d4ba3cc0f0.png"
+                        class="img-fluid" alt="Imagen del comprobante">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -122,9 +124,14 @@
                 "data": null,
                 "render": function(data, type, row, meta) {
                     template =
-                        `<button class="btn btn-sm btn-success mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Validar</button>`;
-                    template +=
                         `<button class="btn btn-sm btn-info mr-2" onclick="ver('${data.imagen_comprobante}')" type="button" data-toggle="modal" data-target="#modalVer"><i class=" fas fa-eye"></i> Ver comprobante</button>`;
+                    if (data.es_valido == 0) {
+                        template +=
+                            `<button class="btn btn-sm btn-success mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Validar</button>`;
+                    } else {
+                        template +=
+                            `<button class="btn btn-sm btn-danger mr-2" onclick="invalidar(${data.id})" type="button"><i class=" fas fa-ban"></i> Invalidar</button>`;
+                    }
                     return template;
                 }
             },
@@ -185,9 +192,47 @@
                 }
             });
         }
-        let url = "{{asset('storage/')}}";
-        function ver(imagen) {
-            $('#imgComprobante').attr('src',url+"/"+imagen)
+        function invalidar(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Vamos a invalidar a este participante",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Invalidar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.participantes.invalidar') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id: id,
+                        }
+                    }).done(function(response) {
+                        if (response.code == '200') {
+                            table.ajax.reload();
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
+                        } else if (response.code == '500') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: response.message
+                            });
+                        }
+                    });
+                }
+            });
         }
-        </script>
+
+        let url = "{{ asset('storage/') }}";
+        function ver(imagen) {
+            $('#imgComprobante').attr('src', url + "/" + imagen)
+        }
+    </script>
 @stop
