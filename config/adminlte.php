@@ -324,7 +324,7 @@ return [
         ],
         [
             'text' => 'Ponentes',
-            'url' => 'ponentes',
+            'route' => 'admin.ponentes.index',
             'icon' => 'fas fa-fw fa-user-tie',
         ],
         ['header' => 'SISTEMA'],
