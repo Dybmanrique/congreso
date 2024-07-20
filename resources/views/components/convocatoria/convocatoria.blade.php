@@ -2,7 +2,7 @@
     <div class="text-white text-center" id="convocatoriaPonencias" style="background-color: #0752B5;">
         <div class="container py-5">
             <div class="row">
-                <h1>Convocatoria de Ponencias</h1>
+                <h1>CONVOCATORIA DE PONENCIAS</h1>
             </div>
         </div>
     </div>
