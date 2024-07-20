@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('enlace');
             $table->foreignId('ponencia_id')->constrained('ponencias')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

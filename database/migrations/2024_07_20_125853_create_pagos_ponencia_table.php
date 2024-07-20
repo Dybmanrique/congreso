@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pago_ponencia', function (Blueprint $table) {
+        Schema::create('pagos_ponencia', function (Blueprint $table) {
             $table->id();
             $table->foreignId('comprobante_id')->constrained('comprobantes')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('poente_ponencia_id')->constrained('ponentes_ponencia')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('ponente_ponencia_id')->constrained('ponentes_ponencia')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pago_ponencia');
+        Schema::dropIfExists('pagos_ponencia');
     }
 };

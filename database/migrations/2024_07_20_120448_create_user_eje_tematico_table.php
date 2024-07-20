@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('eje_tematico_id')->constrained('eje_tematicos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
