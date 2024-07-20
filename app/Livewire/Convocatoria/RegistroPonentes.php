@@ -7,6 +7,7 @@ use App\Models\Documento;
 use App\Models\EjeTematico;
 use App\Models\GrupoInvestigacion;
 use App\Models\Institucion;
+use App\Models\Paper;
 use App\Models\Persona;
 use App\Models\Ponencia;
 use App\Models\Ponente;
@@ -22,7 +23,7 @@ class RegistroPonentes extends Component
 
     public $ponencia, $titulo, $resumen, $nombres,  $ap_paterno, $ap_materno, $correo, $celular, $tipo_documento_id, $numero_documento, $tiposDocumento,
         $grupoInvestigacion, $documento, $persona_id, $grupo_investigacion_id, $institucion_id, $orcid_id, $cv_resumen, $foto, $instit, $Grupo_Investigacion, $nombre_grupo, $nombre_institucion, $valorNombreGrupo;
-    public $ejesTematicos, $eje_tematico_id, $grupo_investigacion_add, $institucion_add;
+    public $ejesTematicos, $eje_tematico_id, $grupo_investigacion_add, $institucion_add, $paper;
 
     public function validateForm()
     {
@@ -42,6 +43,7 @@ class RegistroPonentes extends Component
             'orcid_id' => 'required',
             'cv_resumen' => 'required',
             'foto' => 'image|max:5605',
+            'paper' => 'nullable|string|max:1000',
         ], [
             'ap_paterno.required' => 'Ingrese su apellido paterno',
             'ap_materno.required' => 'Ingrese su apellido materno',
@@ -79,6 +81,13 @@ class RegistroPonentes extends Component
             $ponencia->titulo = $this->titulo;
             $ponencia->resumen = $this->resumen;
             $ponencia->save();
+
+            if(trim($this->paper) != "" && $this->paper != null){
+                Paper::create([
+                    'enlace' => $this->paper,
+                    'ponencia_id' => $ponencia->id,
+                ]);
+            }
 
             // Luego, crea una nueva persona con los datos del formulario
             $persona = new Persona();
@@ -125,7 +134,7 @@ class RegistroPonentes extends Component
             // Limpia los campos
             $this->reset([
                 'titulo', 'resumen', 'nombres', 'ap_paterno', 'ap_materno', 'correo', 'celular', 'tipo_documento_id', 'numero_documento',
-                'grupo_investigacion_id', 'institucion_id', 'orcid_id', 'cv_resumen', 'foto', 'eje_tematico_id'
+                'grupo_investigacion_id', 'institucion_id', 'orcid_id', 'cv_resumen', 'foto', 'eje_tematico_id','paper'
             ]);
         } catch (\Exception $ex) {
             $this->dispatch('error');

@@ -162,6 +162,14 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <label for="paper" class="mt-2">Enlace de paper:</label>
+                                            <input type="text" class="form-control" id="paper"
+                                                wire:model="paper">
+                                            @error('paper')
+                                                <span class="error text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <label for="foto" class="mt-2">Subir Foto:</label>
                                             <input type="file" class="form-control" id="foto"
                                                 wire:model="foto" required>
