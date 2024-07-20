@@ -13,4 +13,5 @@ Route::middleware([
     Route::get('participantes/data', [ParticipantesController::class, 'data'])->name('admin.participantes.data');
     Route::post('participantes/validar', [ParticipantesController::class, 'validar'])->name('admin.participantes.validar');
     Route::post('participantes/invalidar', [ParticipantesController::class, 'invalidar'])->name('admin.participantes.invalidar');
+    Route::get('participantes/crear', [ParticipantesController::class, 'create'])->name('admin.participantes.create');
 });

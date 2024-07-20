@@ -31,6 +31,9 @@ class ParticipantesController extends Controller
         }
         return $participantes;
     }
+    function create() {
+        return view('admin.participantes.create');
+    }
     public function validar(Request $request)
     {
         try {

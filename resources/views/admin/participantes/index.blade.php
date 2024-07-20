@@ -30,6 +30,9 @@
     </div>
 
     <div class="card">
+        <div class="card-header">
+            <a href="{{route('admin.participantes.create')}}" class="btn btn-success">Nuevo participante</a>
+        </div>
         <div class="card-body">
             <div class="table-responsive ">
                 <table class="table table-striped table-sm w-100" id="table">
