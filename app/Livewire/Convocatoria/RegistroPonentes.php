@@ -107,7 +107,7 @@ class RegistroPonentes extends Component
             //crea un nuevo registro en la tabla intermedia con los IDs del Autor y la Ponencia
             $ponencia->autores()->attach($Autor->id);
 
-            $nombreFoto = $this->foto->store('fotos', 'public');
+            $nombreFoto = $this->foto->store('ponentes', 'public');
 
             $ponente = new Ponente();
             $ponente->autor_id = $Autor->id;

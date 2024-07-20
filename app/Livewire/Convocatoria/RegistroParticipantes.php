@@ -100,11 +100,13 @@ class RegistroParticipantes extends Component
             $participante->tipo_participante_id = $this->tipo_participante_id;
             $participante->save();
     
+            $nombreFoto = $this->imagen_comprobante->store('comprobantes', 'public');
+
             $comprobante = new Comprobante();
             $comprobante->metodo_pago_id = $this->metodo_pago_id;
             $comprobante->fecha_pago = $this->fecha_pago;
             $comprobante->monto = $this->monto;
-            $comprobante->imagen_comprobante = $this->imagen_comprobante;
+            $comprobante->imagen_comprobante = $nombreFoto;
             $comprobante->save();
     
             $registro_congreso = new RegistroCongreso();
