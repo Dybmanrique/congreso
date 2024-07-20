@@ -15,6 +15,7 @@ class RegistroCongreso extends Model
     protected $fillable = [
         'participante_id',
         'comprobante_id',
+        'es_valido',
         'uuid'
     ];
 
