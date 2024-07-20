@@ -130,6 +130,12 @@
                                         @error('imagen_comprobante')
                                             <span class="error text-danger">{{ $message }}</span>
                                         @enderror
+                                        <div wire:loading wire:target="imagen_comprobante">
+                                            <div class="spinner-border spinner-border-sm" role="status">
+                                                <span class="visually-hidden">Loading...</span> 
+                                            </div>
+                                            Cargando...
+                                        </div>
                                     </div>
 
                                 </div>
@@ -140,7 +146,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button class="btn btn-primary" type="submit">Enviar</button>
+                    <button class="btn btn-primary" wire:loading.class="disabled" type="submit">Enviar</button>
                 </div>
             </form>
         </div>
