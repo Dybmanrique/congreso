@@ -22,4 +22,7 @@ class Participante extends Model
     {
         return $this->belongsTo(TipoParticipante::class);
     }
+    public function persona() {
+        return $this->belongsTo(Persona::class);
+    }
 }

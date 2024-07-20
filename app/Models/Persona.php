@@ -21,17 +21,8 @@ class Persona extends Model
         return $this->hasMany(Documento::class);
     }
 
-    // public function participante()
-    // {
-    //     return $this->hasOne(Participante::class);
-    // }
-
-    // public function organizador()
-    // {
-    //     return $this->hasOne(Organizador::class);
-    // }
-    // public function autor()
-    // {
-    //     return $this->hasOne(Autor::class);
-    // }
+    public function todos_los_documentos()
+    {
+        return $this->belongsToMany(TipoDocumento::class, 'documentos', 'persona_id', 'tipo_documento_id')->withPivot('numero');
+    }
 }
