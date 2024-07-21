@@ -73,7 +73,7 @@
                 "data": null,
                 "render": function(data, type, row, meta) {
                     template =
-                        `<button class="btn btn-sm btn-primary mr-2"" type="button"><i class="far fa-edit"></i> Editar</button>`;
+                        `<a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.users.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>`.replace(':id', data.id);
                     template +=
                         `<button class="btn btn-sm btn-danger mr-2"" type="button"><i class="far fa-trash-alt"></i> Eliminar</button>`;
                     return template;

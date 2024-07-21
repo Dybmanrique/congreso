@@ -21,21 +21,30 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password*:</label>
-                            <input wire:model='password' type="password" id="password" class="form-control"
-                                placeholder="Ingrese una contraseña" required>
-                            @error('password')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="password_confirmation">Confirmar password*:</label>
-                            <input wire:model='password_confirmation' type="password" id="password_confirmation"
-                                class="form-control" placeholder="Repita la contraseña" required>
-                            @error('password_confirmation')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                        <button class="btn btn-info mt-2 mb-2" type="button" data-toggle="collapse"
+                            data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Cambiar contraseña <i class="fas fa-key"></i>
+                        </button>
+
+                        <div wire:ignore.self class="collapse mt-0" id="collapseExample">
+                            <div class="card card-body border shadow-none">
+                                <div class="form-group">
+                                    <label for="password">Password*:</label>
+                                    <input wire:model='password' type="password" id="password" class="form-control"
+                                        placeholder="Ingrese una contraseña">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="password_confirmation">Confirmar password*:</label>
+                                    <input wire:model='password_confirmation' type="password" id="password_confirmation"
+                                        class="form-control" placeholder="Repita la contraseña">
+                                    @error('password_confirmation')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -53,7 +62,9 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary float-right">Crear</button>
+
+
+                <button type="submit" class="btn btn-primary float-right">Editar</button>
             </form>
         </div>
     </div>

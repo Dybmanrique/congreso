@@ -4,14 +4,14 @@
 
 @section('content_header')
     <div class="d-flex flex-row justify-content-between">
-        <h1>Agregar usuarios</h1>
+        <h1>Editar usuario</h1>
         <a href="{{route('admin.users.index')}}" class="btn btn-info"><i class="fas fa-arrow-left"></i> Volver</a>
     </div>
 @stop
 
 @section('content')
 
-    @livewire('admin.users.form-create')
+    @livewire('admin.users.form-edit', ['user' => $user])
 
 @stop
 

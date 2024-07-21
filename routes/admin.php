@@ -31,6 +31,7 @@ Route::middleware([
     Route::get('usuarios', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('usuarios/data', [UserController::class, 'data'])->name('admin.users.data');
     Route::get('usuarios/crear', [UserController::class, 'create'])->name('admin.users.create');
+    Route::get('usuarios/editar/{user}', [UserController::class, 'edit'])->name('admin.users.edit');
 
     Route::get('/email', function () {
         return view('emails.validar-ponencia', ['enlace' => 'xdxddxxd.com']);
