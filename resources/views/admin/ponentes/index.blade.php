@@ -228,7 +228,7 @@
                     }
                     if (data.es_valido == 0) {
                         template +=
-                            `<button class="btn btn-sm btn-success mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Validar</button>`;
+                            `<button class="btn btn-sm btn-success mr-2" onclick="validar(${data.id}, '${data.correo}')" type="button"><i class=" fas fa-check"></i> Validar</button>`;
                     } else {
                         template +=
                             `<button class="btn btn-sm btn-danger mr-2" onclick="invalidar(${data.id})" type="button"><i class=" fas fa-ban"></i> Invalidar</button>`;
@@ -256,7 +256,7 @@
             columnDefs: columnDefs,
         });
 
-        function validar(id) {
+        function validar(id, email) {
             Swal.fire({
                 title: '¿Estas seguro?',
                 text: "Vamos a validar a este ponente, y enviarle un CORREO ELECTRÓNICO para que confirme el pago.",
@@ -275,6 +275,7 @@
                         data: {
                             "_token": "{{ csrf_token() }}",
                             id: id,
+                            email: email,
                         }
                     }).done(function(response) {
                         if (response.code == '200') {

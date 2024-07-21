@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ValidarPonencia;
 use App\Models\Persona;
 use App\Models\PonentePonencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PonentesController extends Controller
 {
@@ -38,12 +40,15 @@ class PonentesController extends Controller
     {
         try {
             $visit = PonentePonencia::find($request->id);
-
+    
             $visit->update([
                 'es_valido' => true,
             ]);
+    
+            Mail::to($request->email)->send(new ValidarPonencia(route('admin.participantes.create')));
+    
             return response()->json([
-                'message' => 'Operación realizada',
+                'message' => 'Operación realizada, se envió un correo electrónico',
                 'code' => '200'
             ]);
         } catch (\Exception $ex) {
