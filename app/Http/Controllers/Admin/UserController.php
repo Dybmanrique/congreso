@@ -12,6 +12,6 @@ class UserController extends Controller
         return view('admin.users.index');
     }
     public function data() {
-        return User::all();
+        return User::with('ejes_tematicos')->get();
     }
 }

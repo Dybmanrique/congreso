@@ -62,4 +62,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function ejes_tematicos(){
+        return $this->belongsToMany(EjeTematico::class, 'user_eje_tematico', 'user_id', 'eje_tematico_id');
+    }
 }

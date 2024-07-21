@@ -20,6 +20,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Ejes temáticos</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -56,6 +57,17 @@
             },
             {
                 "data": "email"
+            },
+            {
+                "data": "ejes_tematicos",
+                "render": function(data, type, row, meta) {
+                    template = "<ul>"
+                    data.forEach(element => {
+                        template += `<li>${element.nombre}</li>`;
+                    });
+                    template+="</ul>"
+                    return template;
+                }
             },
             {
                 "data": null,
