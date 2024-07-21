@@ -14,4 +14,7 @@ class UserController extends Controller
     public function data() {
         return User::with('ejes_tematicos')->get();
     }
+    public function create() {
+        return view('admin.users.create');
+    }
 }

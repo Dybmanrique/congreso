@@ -10,7 +10,7 @@
 
     <div class="card">
         <div class="card-header">
-            {{-- <a href="{{route('admin.participantes.create')}}" class="btn btn-success">Nuevo usuario</a> --}}
+            <a href="{{route('admin.users.create')}}" class="btn btn-success">Nuevo usuario</a>
         </div>
         <div class="card-body">
             <div class="table-responsive ">
