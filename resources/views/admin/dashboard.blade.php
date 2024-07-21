@@ -7,14 +7,35 @@
 @stop
 
 @section('content')
-    <p>Bienvenido al panel de administración.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="small-box bg-light">
+                <div class="inner">
+                    <h3>150</h3>
+                    <p>Participantes</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="small-box bg-light">
+                <div class="inner">
+                    <h3>50</h3>
+                    <p>Ponentes</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
-    
 @stop
