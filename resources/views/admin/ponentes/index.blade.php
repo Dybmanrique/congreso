@@ -8,7 +8,29 @@
 
 @section('content')
 
-    <!-- Modal -->
+    <!-- Modal Comprobante-->
+    <div class="modal fade" id="modalVer" tabindex="-1" aria-labelledby="modalVerLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalVerLabel">Comprobante</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="imgComprobante"
+                        src="https://edteam-media.s3.amazonaws.com/blogs/big/2ab53939-9b50-47dd-b56e-38d4ba3cc0f0.png"
+                        class="img-fluid" alt="Imagen del comprobante">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalles-->
     <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -190,7 +212,12 @@
             {
                 "data": null,
                 "render": function(data, type, row, meta) {
-                    template =
+                    template = "";
+                    if (data.imagen_comprobante != null) {
+                        template =
+                            `<button class="btn btn-sm btn-info mr-2" onclick="ver('${data.imagen_comprobante}')" type="button" data-toggle="modal" data-target="#modalVer"><i class="far fa-file-alt"></i> Ver comprobante</button>`;
+                    }
+                    template +=
                         `<button class="btn btn-sm btn-secondary mr-2 btn-ver" type="button" data-toggle="modal" data-target="#detallesModal"><i class=" fas fa-eye"></i> Detalles</button>`;
                     if (data.estado == 0) {
                         template +=
@@ -266,6 +293,7 @@
                 }
             });
         }
+
         function invalidar(id) {
             Swal.fire({
                 title: '¿Estas seguro?',
@@ -303,6 +331,7 @@
                 }
             });
         }
+
         function habilitar(id) {
             Swal.fire({
                 title: '¿Estas seguro?',
@@ -340,6 +369,7 @@
                 }
             });
         }
+
         function inhabilitar(id) {
             Swal.fire({
                 title: '¿Estas seguro?',
@@ -390,5 +420,9 @@
             $('#cv_resumen').text(data.cv_resumen);
             $('#foto').attr('src', `${url}/${data.foto}`);
         });
+
+        function ver(imagen) {
+            $('#imgComprobante').attr('src', url + "/" + imagen)
+        }
     </script>
 @stop
