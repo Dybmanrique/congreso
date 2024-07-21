@@ -24,6 +24,8 @@ Route::middleware([
     Route::post('ponentes/invalidar', [PonentesController::class, 'invalidar'])->name('admin.ponentes.invalidar');
     Route::post('ponentes/habilitar', [PonentesController::class, 'habilitar'])->name('admin.ponentes.habilitar');
     Route::post('ponentes/inhabilitar', [PonentesController::class, 'inhabilitar'])->name('admin.ponentes.inhabilitar');
+    Route::get('ponentes/crear', [PonentesController::class, 'create'])->name('admin.ponentes.create');
+
 
     Route::get('/email', function () {
         return view('emails.validar-ponencia', ['enlace' => 'xdxddxxd.com']);

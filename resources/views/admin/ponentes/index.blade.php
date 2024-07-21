@@ -125,7 +125,7 @@
 
     <div class="card">
         <div class="card-header">
-            {{-- <a href="{{route('admin.participantes.create')}}" class="btn btn-success">Nuevo participante</a> --}}
+            <a href="{{route('admin.ponentes.create')}}" class="btn btn-success">Nuevo ponente</a>
         </div>
         <div class="card-body">
             <div class="table-responsive ">

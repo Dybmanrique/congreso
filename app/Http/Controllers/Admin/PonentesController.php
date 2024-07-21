@@ -38,6 +38,10 @@ class PonentesController extends Controller
         }
         return $ponentes;
     }
+    function create()
+    {
+        return view('admin.ponentes.create');
+    }
     public function validar(Request $request)
     {
         try {
