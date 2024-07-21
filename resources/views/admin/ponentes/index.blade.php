@@ -53,7 +53,7 @@
                                         <div class="col-sm-6">
                                             <h6 class="mb-3">Resumen:</h6>
                                         </div>
-                                        <div id="resumen" class="col-sm-9 text-secondary">
+                                        <div id="resumen" class="col-sm-12 text-secondary">
                                             Resumen
                                         </div>
                                     </div>
@@ -66,9 +66,9 @@
 
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <h6 class="mb-3">Resumen CV:</h6>
+                                            <h6 class="mb-3">CV resumen:</h6>
                                         </div>
-                                        <div id="resumenCV" class="col-sm-12 text-secondary">
+                                        <div id="cv_resumen" class="col-sm-12 text-secondary">
                                             CV resumen
                                         </div>
                                     </div>
@@ -302,7 +302,7 @@
             $('#institucion').text(data.institucion);
             $('#titulo').text(data.titulo);
             $('#resumen').text(data.resumen);
-            $('#resumen_cv').text(data.resumen_cv);
+            $('#cv_resumen').text(data.cv_resumen);
             $('#foto').attr('src',`${url}/${data.foto}`);
         });
     </script>
