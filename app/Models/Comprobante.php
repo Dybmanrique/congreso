@@ -13,6 +13,9 @@ class Comprobante extends Model
     protected $table = "comprobantes";
 
     protected $fillable = [
+        'fecha_pago',
+        'monto',
+        'imagen_comprobante',
         'metodo_pago_id',
         'uuid'
     ];

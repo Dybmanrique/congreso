@@ -9,6 +9,7 @@ use App\Models\PonentePonencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class PonentesController extends Controller
 {
@@ -43,9 +44,10 @@ class PonentesController extends Controller
     
             $visit->update([
                 'es_valido' => true,
+                'uuid' => (string) Str::uuid()
             ]);
     
-            Mail::to($request->email)->send(new ValidarPonencia(route('admin.participantes.create')));
+            Mail::to($request->email)->send(new ValidarPonencia(route('convocatoria.validar_ponencia',$visit->uuid)));
     
             return response()->json([
                 'message' => 'Operación realizada, se envió un correo electrónico',

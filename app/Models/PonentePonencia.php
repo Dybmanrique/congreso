@@ -21,6 +21,10 @@ class PonentePonencia extends Model
         'eje_tematico_id',
     ];
 
+    public function ponente() {
+        return $this->belongsTo(Ponente::class);
+    }
+
     public function eje_tematico()
     {
         return $this->belongsTo(EjeTematico::class);
