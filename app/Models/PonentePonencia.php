@@ -14,6 +14,7 @@ class PonentePonencia extends Model
 
     protected $fillable = [
         'estado',
+        'es_valido',
         'uuid',
         'ponente_id',
         'ponencia_id',

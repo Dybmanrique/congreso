@@ -20,5 +20,8 @@ Route::middleware([
     //PONENTES
     Route::get('ponentes', [PonentesController::class, 'index'])->name('admin.ponentes.index');
     Route::get('ponentes/data', [PonentesController::class, 'data'])->name('admin.ponentes.data');
-
+    Route::post('ponentes/validar', [PonentesController::class, 'validar'])->name('admin.ponentes.validar');
+    Route::post('ponentes/invalidar', [PonentesController::class, 'invalidar'])->name('admin.ponentes.invalidar');
+    Route::post('ponentes/habilitar', [PonentesController::class, 'habilitar'])->name('admin.ponentes.habilitar');
+    Route::post('ponentes/inhabilitar', [PonentesController::class, 'inhabilitar'])->name('admin.ponentes.inhabilitar');
 });

@@ -25,8 +25,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img id="foto" src="https://cdn-icons-png.freepik.com/512/3106/3106921.png" alt="Admin" height="150"
-                                            class="rounded-circle" width="150">
+                                        <img id="foto" src="https://cdn-icons-png.freepik.com/512/3106/3106921.png"
+                                            alt="Admin" height="150" class="rounded-circle" width="150">
                                         <div class="mt-3">
                                             <h5 id="ponente">Nombres</h5>
                                             <p id="grupo_investigacion" class="text-secondary mb-1">Grupo investigación</p>
@@ -177,10 +177,14 @@
                 "data": "grupo_investigacion"
             },
             {
-                "data": "estado",
+                "data": null,
                 "render": function(data, type, row, meta) {
-                    return (data == 1) ? '<span class="badge badge-primary">Habilitado</span>' :
-                        '<span class="badge badge-info">Inhabilitado</span>';
+                    template = ""
+                    template += (data.estado == 1) ? '<span class="badge badge-primary mr-1">Habilitado</span>' :
+                        '<span class="badge badge-info mr-1">Inhabilitado</span>';
+                    template += (data.es_valido == 1) ? '<span class="badge badge-success">Validado</span>' :
+                        '<span class="badge badge-warning">No validado</span>';
+                    return template;
                 }
             },
             {
@@ -190,10 +194,17 @@
                         `<button class="btn btn-sm btn-secondary mr-2 btn-ver" type="button" data-toggle="modal" data-target="#detallesModal"><i class=" fas fa-eye"></i> Detalles</button>`;
                     if (data.estado == 0) {
                         template +=
-                            `<button class="btn btn-sm btn-primary mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Habilitar</button>`;
+                            `<button class="btn btn-sm btn-primary mr-2" onclick="habilitar(${data.id})" type="button"><i class=" fas fa-check"></i> Habilitar</button>`;
                     } else {
                         template +=
-                            `<button class="btn btn-sm btn-danger mr-2" onclick="invalidar(${data.id})" type="button"><i class=" fas fa-ban"></i> Inhabilitar</button>`;
+                            `<button class="btn btn-sm btn-danger mr-2" onclick="inhabilitar(${data.id})" type="button"><i class=" fas fa-ban"></i> Inhabilitar</button>`;
+                    }
+                    if (data.es_valido == 0) {
+                        template +=
+                            `<button class="btn btn-sm btn-success mr-2" onclick="validar(${data.id})" type="button"><i class=" fas fa-check"></i> Validar</button>`;
+                    } else {
+                        template +=
+                            `<button class="btn btn-sm btn-danger mr-2" onclick="invalidar(${data.id})" type="button"><i class=" fas fa-ban"></i> Invalidar</button>`;
                     }
                     return template;
                 }
@@ -218,80 +229,154 @@
             columnDefs: columnDefs,
         });
 
-        // function validar(id) {
-        //     Swal.fire({
-        //         title: '¿Estas seguro?',
-        //         text: "Vamos a validar a este participante",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Si, Validar!',
-        //         cancelButtonText: 'No'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             $.ajax({
-        //                 url: "{{ route('admin.participantes.validar') }}",
-        //                 type: "POST",
-        //                 dataType: 'json',
-        //                 data: {
-        //                     "_token": "{{ csrf_token() }}",
-        //                     id: id,
-        //                 }
-        //             }).done(function(response) {
-        //                 if (response.code == '200') {
-        //                     table.ajax.reload();
-        //                     Toast.fire({
-        //                         icon: 'success',
-        //                         title: response.message
-        //                     });
-        //                 } else if (response.code == '500') {
-        //                     Toast.fire({
-        //                         icon: 'info',
-        //                         title: response.message
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
-        // }
-        // function invalidar(id) {
-        //     Swal.fire({
-        //         title: '¿Estas seguro?',
-        //         text: "Vamos a invalidar a este participante",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Si, Invalidar!',
-        //         cancelButtonText: 'No'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             $.ajax({
-        //                 url: "{{ route('admin.participantes.invalidar') }}",
-        //                 type: "POST",
-        //                 dataType: 'json',
-        //                 data: {
-        //                     "_token": "{{ csrf_token() }}",
-        //                     id: id,
-        //                 }
-        //             }).done(function(response) {
-        //                 if (response.code == '200') {
-        //                     table.ajax.reload();
-        //                     Toast.fire({
-        //                         icon: 'success',
-        //                         title: response.message
-        //                     });
-        //                 } else if (response.code == '500') {
-        //                     Toast.fire({
-        //                         icon: 'info',
-        //                         title: response.message
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
-        // }
+        function validar(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Vamos a validar a este ponente, y enviarle un CORREO ELECTRÓNICO para que confirme el pago.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Validar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.ponentes.validar') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id: id,
+                        }
+                    }).done(function(response) {
+                        if (response.code == '200') {
+                            table.ajax.reload();
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
+                        } else if (response.code == '500') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: response.message
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        function invalidar(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Vamos a invalidar a este ponete",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Invalidar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.ponentes.invalidar') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id: id,
+                        }
+                    }).done(function(response) {
+                        if (response.code == '200') {
+                            table.ajax.reload();
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
+                        } else if (response.code == '500') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: response.message
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        function habilitar(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Vamos a habilitar a este ponete",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Habilitar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.ponentes.habilitar') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id: id,
+                        }
+                    }).done(function(response) {
+                        if (response.code == '200') {
+                            table.ajax.reload();
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
+                        } else if (response.code == '500') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: response.message
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        function inhabilitar(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Vamos a inhabilitar a este ponete",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Inhabilitar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.ponentes.inhabilitar') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id: id,
+                        }
+                    }).done(function(response) {
+                        if (response.code == '200') {
+                            table.ajax.reload();
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
+                        } else if (response.code == '500') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: response.message
+                            });
+                        }
+                    });
+                }
+            });
+        }
 
         let url = "{{ asset('storage/') }}";
         $('#table tbody').on('click', '.btn-ver', function() {
@@ -303,7 +388,7 @@
             $('#titulo').text(data.titulo);
             $('#resumen').text(data.resumen);
             $('#cv_resumen').text(data.cv_resumen);
-            $('#foto').attr('src',`${url}/${data.foto}`);
+            $('#foto').attr('src', `${url}/${data.foto}`);
         });
     </script>
 @stop
