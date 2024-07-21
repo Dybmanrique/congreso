@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pagos_ponencia', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('fecha_registro');
             $table->foreignId('comprobante_id')->constrained('comprobantes')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('ponente_ponencia_id')->constrained('ponentes_ponencia')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
