@@ -330,7 +330,7 @@ return [
         ['header' => 'SISTEMA'],
         [
             'text' => 'Usuarios',
-            'url' => 'usuarios',
+            'route' => 'admin.users.index',
             'icon' => 'fas fa-fw fa-user-cog',
         ],
     ],

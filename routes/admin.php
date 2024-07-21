@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ParticipantesController;
 use App\Http\Controllers\Admin\PonentesController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +27,9 @@ Route::middleware([
     Route::post('ponentes/inhabilitar', [PonentesController::class, 'inhabilitar'])->name('admin.ponentes.inhabilitar');
     Route::get('ponentes/crear', [PonentesController::class, 'create'])->name('admin.ponentes.create');
 
+    //USUARIOS
+    Route::get('usuarios', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('usuarios/data', [UserController::class, 'data'])->name('admin.users.data');
 
     Route::get('/email', function () {
         return view('emails.validar-ponencia', ['enlace' => 'xdxddxxd.com']);
