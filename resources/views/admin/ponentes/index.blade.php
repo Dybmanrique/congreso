@@ -19,6 +19,21 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td class="font-weight-bold mr-2">Fecha de pago:</td>
+                            <td id="fecha_pago"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold mr-2">Metodo de pago:</td>
+                            <td id="metodo"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold mr-2">Monto (S/.):</td>
+                            <td id="monto"></td>
+                        </tr>
+                    </table>
+                    <hr>
                     <img id="imgComprobante"
                         src="https://edteam-media.s3.amazonaws.com/blogs/big/2ab53939-9b50-47dd-b56e-38d4ba3cc0f0.png"
                         class="img-fluid" alt="Imagen del comprobante">
@@ -215,7 +230,7 @@
                     template = "";
                     if (data.imagen_comprobante != null) {
                         template =
-                            `<button class="btn btn-sm btn-info mr-2" onclick="ver('${data.imagen_comprobante}')" type="button" data-toggle="modal" data-target="#modalVer"><i class="far fa-file-alt"></i> Ver comprobante</button>`;
+                            `<button class="btn btn-sm btn-info mr-2 btn-comprobante" type="button" data-toggle="modal" data-target="#modalVer"><i class="far fa-file-alt"></i> Ver comprobante</button>`;
                     }
                     template +=
                         `<button class="btn btn-sm btn-secondary mr-2 btn-ver" type="button" data-toggle="modal" data-target="#detallesModal"><i class=" fas fa-eye"></i> Detalles</button>`;
@@ -422,8 +437,16 @@
             $('#foto').attr('src', `${url}/${data.foto}`);
         });
 
-        function ver(imagen) {
-            $('#imgComprobante').attr('src', url + "/" + imagen)
-        }
+        $('#table tbody').on('click', '.btn-comprobante', function() {
+            var tr = $(this).closest('tr');
+            var data = table.row(tr).data();
+            
+            $('#fecha_pago').text(data.fecha_pago.split(' ')[0]);
+            $('#monto').text(data.monto);
+            $('#metodo').text(data.metodo);
+            
+            $('#imgComprobante').attr('src', url + "/" + data.imagen_comprobante)
+        });
+
     </script>
 @stop
