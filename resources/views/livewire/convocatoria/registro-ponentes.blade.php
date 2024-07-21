@@ -176,6 +176,12 @@
                                             @error('foto')
                                                 <span class="error text-danger">{{ $message }}</span>
                                             @enderror
+                                            <div wire:loading wire:target="foto">
+                                                <div class="spinner-border spinner-border-sm" role="status">
+                                                    <span class="visually-hidden">Loading...</span> 
+                                                </div>
+                                                Cargando...
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="cv_resumen" class="mt-2">CV Resumen:</label>
@@ -191,7 +197,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-primary" type="submit">Enviar</button>
+                        <button class="btn btn-primary" wire:loading.class="disabled" type="submit">Enviar</button>
                     </div>
                 </form>
             </div>
