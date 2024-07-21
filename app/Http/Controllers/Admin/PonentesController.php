@@ -31,7 +31,7 @@ class PonentesController extends Controller
             join grupos_investigacion on grupos_investigacion.id = autores.grupo_investigacion_id   
             left join pagos_ponencia on pagos_ponencia.ponente_ponencia_id = ponentes_ponencia.id
             left join comprobantes on comprobantes.id = pagos_ponencia.comprobante_id 
-            join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id order by ponentes_ponencia.id desc");
+            left join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id order by ponentes_ponencia.id desc");
 
         foreach ($ponentes as $ponente) {
             $ponente->identificaciones = Persona::find($ponente->persona_id)->todos_los_documentos()->get();
@@ -68,6 +68,7 @@ class PonentesController extends Controller
 
             $visit->update([
                 'es_valido' => false,
+                'uuid' => null,
             ]);
             return response()->json([
                 'message' => 'Operación realizada',
