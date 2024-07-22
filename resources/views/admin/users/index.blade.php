@@ -61,12 +61,16 @@
             {
                 "data": "ejes_tematicos",
                 "render": function(data, type, row, meta) {
-                    template = "<ul>"
-                    data.forEach(element => {
-                        template += `<li>${element.nombre}</li>`;
-                    });
-                    template+="</ul>"
-                    return template;
+                    if (data.length <= 0) {
+                        return 'Ninguno asignado';
+                    } else{
+                        template = "<ul style='list-style: none; margin: 0; padding: 0;'>"
+                        data.forEach(element => {
+                            template += `<li>- ${element.nombre}</li>`;
+                        });
+                        template+="</ul>"
+                        return template;
+                    }
                 }
             },
             {
@@ -75,7 +79,7 @@
                     template =
                         `<a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.users.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>`.replace(':id', data.id);
                     template +=
-                        `<button class="btn btn-sm btn-danger mr-2"" type="button"><i class="far fa-trash-alt"></i> Eliminar</button>`;
+                        `<button class="btn btn-sm btn-danger mr-2" onclick='eliminar(${data.id})' type="button"><i class="far fa-trash-alt"></i> Eliminar</button>`;
                     return template;
                 }
             },
@@ -98,5 +102,43 @@
             },
             columnDefs: columnDefs,
         });
+
+        function eliminar(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Vamos a eliminar a este participante",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.users.delete') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            id: id,
+                        }
+                    }).done(function(response) {
+                        if (response.code == '200') {
+                            table.ajax.reload();
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
+                        } else if (response.code == '500') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: response.message
+                            });
+                        }
+                    });
+                }
+            });
+        }
     </script>
 @stop
