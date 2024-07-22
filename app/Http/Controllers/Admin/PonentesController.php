@@ -17,8 +17,13 @@ class PonentesController extends Controller
     {
         return view('admin.ponentes.index');
     }
-    function data() {
-        $ponentes = DB::select("SELECT ponentes_ponencia.id, ponentes_ponencia.estado, ponentes_ponencia.es_valido, ponentes_ponencia.uuid, titulo, resumen, enlace as paper, eje_tematicos.nombre as eje_tematico, cv_resumen, foto, 
+    function data()
+    {
+        $ids = auth()->user()->ejes_tematicos->pluck('id');
+        $ids = $ids->toArray();
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+        $sql = "SELECT ponentes_ponencia.id, ponentes_ponencia.estado, ponentes_ponencia.es_valido, ponentes_ponencia.uuid, titulo, resumen, enlace as paper, eje_tematicos.nombre as eje_tematico, cv_resumen, foto, 
             orcid_id, ap_paterno, ap_materno, nombres, correo, celular, instituciones.nombre as institucion, grupos_investigacion.nombre as grupo_investigacion, persona_id, comprobantes.fecha_pago, comprobantes.monto, comprobantes.imagen_comprobante, metodos_pago.metodo
             from ponentes_ponencia
             join ponencias on ponencias.id = ponentes_ponencia.ponencia_id
@@ -31,7 +36,10 @@ class PonentesController extends Controller
             join grupos_investigacion on grupos_investigacion.id = autores.grupo_investigacion_id   
             left join pagos_ponencia on pagos_ponencia.ponente_ponencia_id = ponentes_ponencia.id
             left join comprobantes on comprobantes.id = pagos_ponencia.comprobante_id 
-            left join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id order by ponentes_ponencia.id desc");
+            left join metodos_pago on metodos_pago.id = comprobantes.metodo_pago_id 
+            WHERE eje_tematicos.id IN ($placeholders) order by ponentes_ponencia.id desc";
+
+        $ponentes = DB::select($sql, $ids);
 
         foreach ($ponentes as $ponente) {
             $ponente->identificaciones = Persona::find($ponente->persona_id)->todos_los_documentos()->get();
@@ -46,14 +54,14 @@ class PonentesController extends Controller
     {
         try {
             $visit = PonentePonencia::find($request->id);
-    
+
             $visit->update([
                 'es_valido' => true,
                 'uuid' => (string) Str::uuid()
             ]);
-    
-            Mail::to($request->email)->send(new ValidarPonencia(route('convocatoria.validar_ponencia',$visit->uuid)));
-    
+
+            Mail::to($request->email)->send(new ValidarPonencia(route('convocatoria.validar_ponencia', $visit->uuid)));
+
             return response()->json([
                 'message' => 'Operación realizada, se envió un correo electrónico',
                 'code' => '200'
